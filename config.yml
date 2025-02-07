@@ -1,0 +1,65 @@
+agencies:
+  - agency_name_to_run_now: 3
+  - NASA:
+      name: NASA
+      agency_live_data_json_link: 'https://data.nasa.gov/data.json'
+      web_archive_cdx_data_for_url_baseUrl: 'https://web.archive.org/cdx/search/cdx?url='
+      web_archive_cdx_data_for_url_postfix: '&output=json'
+      web_archive_basic_api_url_base: 'https://web.archive.org/web/'
+      web_archive_basic_api_url_if: 'if_/'
+      dates_to_pull:
+        - "20241009112610"
+      date_agency_data_dot_json_harvested: "latest"
+      re_harvest_existing_dates: true
+      folder_paths:
+        base_agency_path: '../data/NASA/'
+        missing_keys_foldername: 'missing_keys/'
+        snapshots_available_in_archive_foldername: 'snapshots_available_in_archive/'
+        data_dot_jsons_raw_from_archive_foldername: 'data_dot_jsons_raw_from_archive/'
+        data_dot_jsons_from_agency_page_foldername: 'data_dot_jsons_from_agency_page/'
+        data_dot_jsons_cleaned_from_archive_ObjectNotList_foldername: 'data_dot_jsons_cleaned_from_archive_ObjectNotList/'
+        data_dot_jsons_cleaned_from_archive_foldername: 'data_dot_jsons_cleaned_from_archive/'
+        data_dot_jsons_cleaned_from_agency_page_ObjectNotList_foldername: 'data_dot_jsons_cleaned_from_agency_page_ObjectNotList'
+  - COMMERCE:
+      name: COMMERCE
+      agency_live_data_json_link: 'https://www.commerce.gov/sites/default/files/data.json'
+      web_archive_cdx_data_for_url_baseUrl: 'https://web.archive.org/cdx/search/cdx?url='
+      web_archive_cdx_data_for_url_postfix: '&output=json'
+      web_archive_basic_api_url_base: 'https://web.archive.org/web/'
+      web_archive_basic_api_url_if: 'if_/'
+      dates_to_pull:
+        - "20241230074521"
+      date_agency_data_dot_json_harvested: "latest"
+      re_harvest_existing_dates: true
+      folder_paths:
+        base_agency_path: '../data/COMMERCE/'
+        missing_keys_foldername: 'missing_keys/'
+        snapshots_available_in_archive_foldername: 'snapshots_available_in_archive/'
+        data_dot_jsons_raw_from_archive_foldername: 'data_dot_jsons_raw_from_archive/'
+        data_dot_jsons_from_agency_page_foldername: 'data_dot_jsons_from_agency_page/'
+        data_dot_jsons_cleaned_from_archive_ObjectNotList_foldername: 'data_dot_jsons_cleaned_from_archive_ObjectNotList/'
+        data_dot_jsons_cleaned_from_archive_foldername: 'data_dot_jsons_cleaned_from_archive/'
+        data_dot_jsons_cleaned_from_agency_page_ObjectNotList_foldername: 'data_dot_jsons_cleaned_from_agency_page_ObjectNotList'     
+  - ED:
+      name: ED
+      agency_live_data_json_link: 'https://data.ed.gov/data.json'
+      web_archive_cdx_data_for_url_baseUrl: 'https://web.archive.org/cdx/search/cdx?url='
+      web_archive_cdx_data_for_url_postfix: '&output=json'
+      web_archive_basic_api_url_base: 'https://web.archive.org/web/'
+      web_archive_basic_api_url_if: 'if_/'
+      dates_to_pull:
+        - "20241220141930"
+      date_agency_data_dot_json_harvested: "latest"
+      re_harvest_existing_dates: true
+      folder_paths:
+        base_agency_path: '../data/ED/'
+        missing_keys_foldername: 'missing_keys/'
+        snapshots_available_in_archive_foldername: 'snapshots_available_in_archive/'
+        data_dot_jsons_raw_from_archive_foldername: 'data_dot_jsons_raw_from_archive/'
+        data_dot_jsons_from_agency_page_foldername: 'data_dot_jsons_from_agency_page/'
+        data_dot_jsons_cleaned_from_archive_ObjectNotList_foldername: 'data_dot_jsons_cleaned_from_archive_ObjectNotList/'
+        data_dot_jsons_cleaned_from_archive_foldername: 'data_dot_jsons_cleaned_from_archive/'
+        data_dot_jsons_cleaned_from_agency_page_ObjectNotList_foldername: 'data_dot_jsons_cleaned_from_agency_page_ObjectNotList'   
+
+
+      
