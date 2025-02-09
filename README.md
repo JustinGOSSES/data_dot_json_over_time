@@ -2,6 +2,8 @@
 Prototype for seeing changes in data.json at NASA and other U.S. government agencies over
 time using the Internet Archive's Wayback Machine.
 
+_To jump down to lessons learned see the section [Early analysis learnings](#early-analysis-learnings)_
+
 ## Function
 
 The purpose of the code in this repository is to analyze and compare snapshots of 
@@ -412,6 +414,7 @@ been removed or datasets no longer exist.
 
 Of the 3 agencies in the initial analysis set, only NASA's' data.json showed datasets
 identifiers in the first snapshot not present in the second snapshot, totally 198 dataset identifiers.
+This compares data.json snapshots on 2024-10-09 and 2025-02-07.
 
 Of those 198, it seems at least 33 were situations where the datset identifer changed but the
 title did not, suggesting these might just be identifer changes related to underlying system
@@ -423,7 +426,7 @@ the end has "-v3" instead of "-v2".
 
 Both of those situations likely do not reflect dataset removal so much as dataset evolution over time.
 
-148 of 149 did not fall into those two previous situation and require additional analysis to see
+148 of 198 did not fall into those two previous situation and require additional analysis to see
 if they are true dataset removals. Most of those 148 have landing page and distribution URls
 that give 200 status messages or mostly do, suggesting that data is still available.
 Others give 403 messages suggesting there is a need to sign in first, especially for
@@ -432,7 +435,8 @@ may indeed be gone but current programmatic checks here do not ensure this with 
 
 There is an incomplete process to build a webpage that visualizes information from the
 JSONs in a static webpage without needing to look at the admittedly big and complex
-JSONs themselves. See the `/visualizations/` directory.
+JSONs themselves. See the `/visualizations/` directory. 
+
 
 
 ### Possible future analysis pathways suggested by this analysis
