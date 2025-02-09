@@ -397,3 +397,35 @@ def get_status_codes_for_all_urls_in_missing_datasets(missing_data_object, first
     print('got to end')
     return missing_data_object
 
+def count_total_datasets_by_identifier_in_json_with_identifier_keyed(dataset_json):
+    """
+    Count the total number of unique datasets by their identifiers.
+
+    Args:
+        dataset_json (dict): The JSON object containing datasets.
+
+    Returns:
+        int: The total number of unique datasets by their identifiers.
+    """
+    unique_identifiers = set()
+    for dataset in dataset_json.get('dataset', []):
+        print(dataset)
+        unique_identifiers.add(dataset)
+    print(len(unique_identifiers))
+    return len(unique_identifiers)
+
+
+def count_total_datasets_by_identifiers_and_load_first(dataset_json_path):
+    ## ..data/NASA/data_dot_jsons_cleaned_from_archive_ObjectNotList/20241009112610.json
+    with open(dataset_json_path, 'r') as f:
+        dataset_json = json.load(f)
+    return count_total_datasets_by_identifier_in_json_with_identifier_keyed(dataset_json)
+
+def count_datasets_independent_of_identifiers_in_unprocessed_json(dataset_json_path):
+    with open(dataset_json_path, 'r') as f:
+        dataset_json = json.load(f)
+    print(len(dataset_json['dataset']))
+    return len(dataset_json['dataset'])
+
+
+# count_total_datasets_by_identifiers_and_load_first('..data/NASA/data_dot_jsons_cleaned_from_archive_ObjectNotList/20241009112610.json')
