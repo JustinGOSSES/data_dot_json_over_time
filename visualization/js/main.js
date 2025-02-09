@@ -1,7 +1,7 @@
 function getBaseURL() {
     const local_base_url = "../"
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        const_local_dev_url = 'http://localhost:8000'
+        const_local_dev_url = 'http://localhost:8000/../'
         const_local_dev_url_path = "../"
         return const_local_dev_url_path; // Adjust the port if necessary
     } else {
