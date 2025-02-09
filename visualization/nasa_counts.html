@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA Counts Visualization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .chart {
+            width: 100%;
+            height: 500px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header data-variable="../data/NASA/missing_keys/20250207233618_vs_20241009112610_missingKeysInSecondNoTitleMatch_WebStatusChecks.json">
+        <h1>NASA missing data counts</h1>
+    </header>
+    <main>
+        
+        <h2>Comparing dates</h2>
+        <span>From <p></p> to <p></p></span>
+        <h2>"Counts: identifiers_in_first_json_missing_from_second_json"</h2>
+        <p id="missingKeys_type1">???</p>
+        <h2>"Counts: identifiers_in_first_json_missing_from_second_json_and_not_same_title_or_close"</h2>
+        <p id="missingKeys_type2">???</p>
+        <h2>"Counts: identifiers_in_first_json_missing_from_second_json_but_with_same_title"</h2>
+        <p id="missingKeys_type3">???</p>
+        <h2>"Counts: identifiers_in_first_json_missing_from_second_json_but_with_almost_same_title"</h2>
+        <p id="missingKeys_type4">???</p>
+
+        <h2>
+        </h2>
+        <div class="container">
+            <div id="chart" class="chart"></div>
+        </div>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+</html>
