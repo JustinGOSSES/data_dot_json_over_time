@@ -1,8 +1,24 @@
+function getBaseURL() {
+    const local_base_url = "../"
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        const_local_dev_url = 'http://localhost:8000'
+        const_local_dev_url_path = "../"
+        return const_local_dev_url_path; // Adjust the port if necessary
+    } else {
+        const pathArray = window.location.pathname
+        const username = pathArray.split('.')[0].replace('https://', '');
+        const repository = pathArray.replace('https://', '').split('/')[1];
+        print("username", username)
+        print("repository", repository)
+        return `https://${username}.github.io/${repository}`;
+    }
+}
+
 // Load JSON data and extract specific key values
 function getMissingKeyCountData(){
     // JavaScript code to read the variable and render the chart
     const header = document.querySelector('header');
-    const path_to_json = header.getAttribute('data-variable');
+    const path_to_json = getBaseURL() + header.getAttribute('data-variable');
     console.log("data attribute from header", path_to_json); // Use this variable as needed
     ////
     return fetch(path_to_json) // Return the fetch promise
@@ -33,6 +49,12 @@ function getCountsPopulate(data){
     updateElementValueById('missingKeys_type3', data['identifiers_in_first_json_missing_from_second_json_but_with_same_title']['count'])
     updateElementValueById('missingKeys_type4', data['identifiers_in_first_json_missing_from_second_json_but_with_almost_same_title']['count'])
 }
+
+
+
+const baseURL = getBaseURL();
+console.log("Base URL:", baseURL);
+
 
 document.addEventListener('DOMContentLoaded', function() {
     getMissingKeyCountData().then(data => {
