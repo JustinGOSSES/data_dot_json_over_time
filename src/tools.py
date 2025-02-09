@@ -291,23 +291,39 @@ def compare_jsons_and_calculate_missing_identifiers(first_data_dot_json_cleaned_
     for key in identifiers_in_first_json_missing_from_second_json:
         dataset_missing_w_missing_id = json1['dataset'][key]
         title = dataset_missing_w_missing_id['title']
+        flag_for_whether_exact_or_approximate_title_found = False
         for key2 in json2_keys:
             if json2['dataset'][key2]['title'] == title:
                 identifiers_in_first_json_missing_from_second_json_but_with_same_title.append(key)
-                break
+                flag_for_whether_exact_or_approximate_title_found = True
+                #break
             else:
-                if key in identifiers_in_first_json_missing_from_second_json_and_not_same_title:
-                    pass
+                #identifiers_in_first_json_missing_from_second_json_and_not_same_title.append(key)
+                title_parts = re.split(r'[_\-. ]|ver', title)
+                json2_title_parts = re.split(r'[_\-. ]|ver', json2['dataset'][key2]['title'])
+                if title_parts[:-1] == json2_title_parts[:-1]:
+                    identifiers_in_first_json_missing_from_second_json_but_with_almost_same_title.append(key)
+                    flag_for_whether_exact_or_approximate_title_found = True
+                # if (json2['dataset'][key2]['title'] != title) and (title_parts[:-1] != json2_title_parts[:-1]):
+                #     identifiers_in_first_json_missing_from_second_json_and_not_same_title.append(key)
                 else:
-                    identifiers_in_first_json_missing_from_second_json_and_not_same_title.append(key)
-                    title_parts = re.split(r'[_\-. ]|ver', title)
-                    json2_title_parts = re.split(r'[_\-. ]|ver', json2['dataset'][key2]['title'])
-                    if title_parts[:-1] == json2_title_parts[:-1]:
-                        identifiers_in_first_json_missing_from_second_json_but_with_almost_same_title.append(key)
+                    pass
+        if flag_for_whether_exact_or_approximate_title_found == False:
+            identifiers_in_first_json_missing_from_second_json_and_not_same_title.append(key)
+            
+                ##### OLD CODE MIGHT GO BACK TO
+                # if key in identifiers_in_first_json_missing_from_second_json_and_not_same_title:
+                #     pass
+                # else:
+                #     identifiers_in_first_json_missing_from_second_json_and_not_same_title.append(key)
+                #     title_parts = re.split(r'[_\-. ]|ver', title)
+                #     json2_title_parts = re.split(r'[_\-. ]|ver', json2['dataset'][key2]['title'])
+                #     if title_parts[:-1] == json2_title_parts[:-1]:
+                #         identifiers_in_first_json_missing_from_second_json_but_with_almost_same_title.append(key)
     
     missing_data_object = {}
     add_property_to_missing_data_object(identifiers_in_first_json_missing_from_second_json, 'identifiers_in_first_json_missing_from_second_json', missing_data_object,json1)
-    add_property_to_missing_data_object(identifiers_in_first_json_missing_from_second_json_and_not_same_title, 'identifiers_in_first_json_missing_from_second_json_and_not_same_title', missing_data_object,json1)
+    add_property_to_missing_data_object(identifiers_in_first_json_missing_from_second_json_and_not_same_title, 'identifiers_in_first_json_missing_from_second_json_and_not_same_title_or_close', missing_data_object,json1)
     add_property_to_missing_data_object(identifiers_in_first_json_missing_from_second_json_but_with_same_title, 'identifiers_in_first_json_missing_from_second_json_but_with_same_title', missing_data_object,json1)
     add_property_to_missing_data_object(identifiers_in_first_json_missing_from_second_json_but_with_almost_same_title, 'identifiers_in_first_json_missing_from_second_json_but_with_almost_same_title', missing_data_object,json1)
     
@@ -352,17 +368,19 @@ def get_status_codes_for_all_urls_in_missing_datasets(missing_data_object, first
                     urls_to_check.append(downloadURL)
         print("got to end of identifiers for this type of missing: ",missing_data_type)
     urls_to_check = list(set(urls_to_check))
+    print("have this many urls to check: ",len(urls_to_check))
     with ThreadPoolExecutor(max_workers=10) as executor:
         future_to_url = {executor.submit(check_url_status, url): url for url in urls_to_check}
         for future in as_completed(future_to_url):
             url, status_code = future.result()
             for missing_data_type in missing_data_object:
+                print("missing_data_type = ",missing_data_type)
                 for identifier in missing_data_object[missing_data_type]['list']:
                     print("starting http status checks for pages for identifier: ", identifier)
                     if missing_data_object[missing_data_type]['object'][identifier].get('landingPage') == url:
                         if 'url_status_checks' not in missing_data_object[missing_data_type]['object'][identifier]:
                             missing_data_object[missing_data_type]['object'][identifier]['url_status_checks'] = {}
-                        missing_data_object[missing_data_type]['object'][identifier]['url_status_checks']['landingPage'] = {url: {current_timestamp: status_code}}
+                            missing_data_object[missing_data_type]['object'][identifier]['url_status_checks']['landingPage'] = {url: {current_timestamp: status_code}}
                     for distribution in missing_data_object[missing_data_type]['object'][identifier]['distribution']:
                         if 'url_status_checks' not in missing_data_object[missing_data_type]['object'][identifier]:
                             missing_data_object[missing_data_type]['object'][identifier]['url_status_checks'] = {}
@@ -370,6 +388,8 @@ def get_status_codes_for_all_urls_in_missing_datasets(missing_data_object, first
                             missing_data_object[missing_data_type]['object'][identifier]['url_status_checks']['distributions_downloadURLs'] = {}
                         if distribution['downloadURL'] == url:
                             missing_data_object[missing_data_type]['object'][identifier]['url_status_checks']['distributions_downloadURLs'][url] = {current_timestamp: status_code}
+                        else:
+                            pass
 
     missing_identifiers_filename = first_snapshot_date + "_vs_" + second_snapshot_date + "_missingKeysInSecondNoTitleMatch_WebStatusChecks" + ".json"
     missing_identifiers_path = base_agency_path + missing_identifiers_folder + missing_identifiers_filename

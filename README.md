@@ -400,16 +400,40 @@ Eventually, a webpage may be build to make understanding the results easier.
 
 ### Missing datasets
 
+#### Data.json lags reality 
+
 Department of Education and Department of Commerce (NOAA and others) don't have any datasets
 missing in data.json across the Biden/Trump administration boundary. Given reports of at least
 some NOAA datasets being taken down, at least temporarily, this may reflect data.json lagging
 reality, meaning updates to data.json likely occur some time after they dataset access has
 been removed or datasets no longer exist. 
 
-There are some datasets in NASA's data.json that do not appear in more recent data.json's.
-Some of these are earth science datasets where multiple versions of a dataset get created
-over time and older version sometimes become treated as "not accurate" or "replaced". At
-least some of the NASA dataset identifiers appear to fall into this situation.
+#### Some removed dataset identifiers appear to be version updates or identifier changes with no other changes but not all
+
+Of the 3 agencies in the initial analysis set, only NASA's' data.json showed datasets
+identifiers in the first snapshot not present in the second snapshot, totally 198 dataset identifiers.
+
+Of those 198, it seems at least 33 were situations where the datset identifer changed but the
+title did not, suggesting these might just be identifer changes related to underlying system
+updates or version updates that didn't change dataset title.
+
+Of those 198, another 32 had nearly the same dataset title with only the last part of the
+title changed in a way consistent with version updates. For example a long title and then 
+the end has "-v3" instead of "-v2". 
+
+Both of those situations likely do not reflect dataset removal so much as dataset evolution over time.
+
+148 of 149 did not fall into those two previous situation and require additional analysis to see
+if they are true dataset removals. Most of those 148 have landing page and distribution URls
+that give 200 status messages or mostly do, suggesting that data is still available.
+Others give 403 messages suggesting there is a need to sign in first, especially for
+some earth data systems that assume a user is signed in. There is a smaller subset that
+may indeed be gone but current programmatic checks here do not ensure this with high accuracy yet.
+
+There is an incomplete process to build a webpage that visualizes information from the
+JSONs in a static webpage without needing to look at the admittedly big and complex
+JSONs themselves. See the `/visualizations/` directory.
+
 
 ### Possible future analysis pathways suggested by this analysis
  
