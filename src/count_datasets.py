@@ -1,0 +1,7 @@
+from tools import count_total_datasets_by_identifiers_and_load_first
+from tools import count_datasets_independent_of_identifiers_in_unprocessed_json
+
+count_unique_datasets_by_identifiers = count_total_datasets_by_identifiers_and_load_first('../data/NASA/data_dot_jsons_cleaned_from_agency_page_ObjectNotList/20250207233618.json')
+
+
+count_non_unique_datasets = count_datasets_independent_of_identifiers_in_unprocessed_json('../data/NASA/data_dot_jsons_from_agency_page/20250207233618.json')
