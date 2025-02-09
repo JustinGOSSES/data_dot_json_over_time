@@ -6,10 +6,10 @@ function getBaseURL() {
         return const_local_dev_url_path; // Adjust the port if necessary
     } else {
         const pathArray = window.location.pathname
-        const username = pathArray.split('.')[0].replace('https://', '');
+        const username = pathArray.replace('https://','').split('.github.io/')[0];
         const repository = pathArray.replace('https://', '').split('/')[1];
-        print("username", username)
-        print("repository", repository)
+        console.log("username", username)
+        console.log("repository", repository)
         return `https://${username}.github.io/${repository}`;
     }
 }
