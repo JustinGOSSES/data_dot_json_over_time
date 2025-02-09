@@ -433,10 +433,20 @@ Others give 403 messages suggesting there is a need to sign in first, especially
 some earth data systems that assume a user is signed in. There is a smaller subset that
 may indeed be gone but current programmatic checks here do not ensure this with high accuracy yet.
 
+##### In progress work to visualize comparison results
+
 There is an incomplete process to build a webpage that visualizes information from the
 JSONs in a static webpage without needing to look at the admittedly big and complex
-JSONs themselves. See the `/visualizations/` directory. 
+JSONs themselves. See the `/visualizations/` directory. One issue to work around is that
+the JSONs are large enough that this repository is using LFS (Git Large File Storage)
+to store them in the GitHub repository, this is fine, except when you attempt to have
+JavaScript read the JSONs in a deployed website, it then doesn't work as it is not a
+JSON any longer but a LFS reference. This means we'll probably need a python 
+script to be run that extract relevant high level metrics from the comparison
+JSON and then put that data into a file or file format that doesn't get converted
+to LFS, perhaps a YAML file?
 
+_This work is in flux._
 
 
 ### Possible future analysis pathways suggested by this analysis
@@ -448,3 +458,12 @@ There might be value in analyzing those statuses and seeing if it possible to
 programmatically recognize when a landing page might be down but a download
 distribution URL still be up as those might be targets for archiving.
 
+## Contributing 
+
+This repository is currently being used for experiments to see how much use
+analysis of agency level data.json might be for understanding availability of
+U.S. government federal open data. It is a very narrow analysis.
+There are lots of other efforts in the broader space. 
+
+If you have questions or want to get in touch on
+related efforts/analysis leave an issue on this repository or find my contact email.
