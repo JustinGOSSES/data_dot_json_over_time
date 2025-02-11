@@ -4,6 +4,8 @@ time using the Internet Archive's Wayback Machine.
 
 _To jump down to lessons learned see the section [Early analysis learnings](#early-analysis-learnings)_
 
+See a [write up on my blog](https://justingosses.com/blog/measuring-changinges-in-gov-data-over-time)
+
 ## Function
 
 The purpose of the code in this repository is to analyze and compare snapshots of 
@@ -86,6 +88,10 @@ change and what not to will get addressed further on.
 The Python file [`src/tools.py`](./src/tools.py) holds a variety of small functions that act as tools or utilities.
 If following the "assumed action" section below, you will not call any of these functions directly
 but you might if you reuse them to analyze different aspects of data.json than initially targeted.
+
+The Python file ['src/count_datasets.py](./src/count_datasets.py) is used to count the number of datasets
+referenced in both original data.json JSONs and processed ones in which the list of datasets is converted
+into a dictionary with the key for each dataset being its identifier.
 
 The Python file
 [`src/get_list_available_snapshots_in_wayback_machine.py`](./src/get_list_available_snapshots_in_wayback_machine.py)
@@ -415,6 +421,10 @@ been removed or datasets no longer exist.
 Of the 3 agencies in the initial analysis set, only NASA's' data.json showed datasets
 identifiers in the first snapshot not present in the second snapshot, totally 198 dataset identifiers.
 This compares data.json snapshots on 2024-10-09 and 2025-02-07.
+
+The 2024-10-09 data.json had 22,360 datasets described. The 2025-02-07 had 22,382 datasets,
+so even with some datasets seemingly missing in the newer data.json, the total number of
+datasets described by metadata went up.
 
 Of those 198, it seems at least 33 were situations where the datset identifer changed but the
 title did not, suggesting these might just be identifer changes related to underlying system
